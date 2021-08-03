@@ -67,4 +67,19 @@ def restaurant_detail(request, pk):
         restaurant.delete()
         return JsonResponse({'message': 'Restaurant was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
 
+@api_view(['GET'])
+def restaurant_cities(request):
+    # restaurants = Restaurant.objects.all()
+    cities = Restaurant.objects.all().values('city')
+    # cities = Restaurant.objects.values_list('city', flat=True).order_by('city').distinct()
+
+    set_cities = []
+    for city in cities:
+        if city not in set_cities:
+            set_cities.append(city)
+
+    print("*** city", set_cities)
+    restaurants_serializer = RestaurantSerializer(set_cities, many=True)
+    return JsonResponse(restaurants_serializer.data, safe=False)
+
 
