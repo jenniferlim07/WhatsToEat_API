@@ -35,9 +35,9 @@ def restaurant_list(request):
         return JsonResponse(restaurants_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     # DELETE all restaurants??
-    elif request.method == 'DELETE':
-        count = Restaurant.objects.all().delete()
-        return JsonResponse({'message': '{} Restaurants were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
+    # elif request.method == 'DELETE':
+    #     count = Restaurant.objects.all().delete()
+    #     return JsonResponse({'message': '{} Restaurants were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
@@ -70,16 +70,36 @@ def restaurant_detail(request, pk):
 @api_view(['GET'])
 def restaurant_cities(request):
     # restaurants = Restaurant.objects.all()
-    cities = Restaurant.objects.all().values('city')
-    # cities = Restaurant.objects.values_list('city', flat=True).order_by('city').distinct()
+    # cities = Restaurant.objects.all().values('city')
+    cities = Restaurant.objects.values('city').order_by('city').distinct()
 
-    set_cities = []
-    for city in cities:
-        if city not in set_cities:
-            set_cities.append(city)
+    # set_cities = []
+    # for city in cities:
+    #     if city not in set_cities:
+    #         set_cities.append(city)
 
-    print("*** city", set_cities)
-    restaurants_serializer = RestaurantSerializer(set_cities, many=True)
+    # print("*** city", set_cities)
+    restaurants_serializer = RestaurantSerializer(cities, many=True)
     return JsonResponse(restaurants_serializer.data, safe=False)
+
+
+# @api_view(['GET', 'POST'])
+# def cuisine_list(request):
+#     if request.method == 'GET':
+#         cuisines = Cuisine.objects.values('types').order_by('types').distinct()
+#         cuisine_serializer = CuisineSerializer(cuisines, many=True)
+#         return JsonResponse(cuisine_serializer.data, safe=False)
+
+#     elif request.method == 'POST':
+
+#         cuisine_data = JSONParser().parse(request)
+#         print("*** ", cuisine_data)
+#         cuisine_serializer = CuisineSerializer(data=cuisine_data)
+#         print("*** ", cuisine_serializer)
+#         if cuisine_serializer.is_valid():
+#             cuisine_serializer.save()
+#             return JsonResponse(cuisine_serializer.data, status=status.HTTP_201_CREATED)
+#         print("*** ", cuisine_serializer.errors)
+#         return JsonResponse(cuisine_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
