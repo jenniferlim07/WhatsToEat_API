@@ -15,11 +15,18 @@ def restaurant_list(request):
     # GET list of restaurants
     # or find by city
     if request.method == 'GET':
-        restaurants = Restaurant.objects.all()
+        # restaurants = Restaurant.objects.all()
+        # print("response ", request)
+        # Project.objects.filter(owner_id=currentUser).order_by('id')
+        restaurants = Restaurant.objects.filter(user=request.user)
+        # print("*** restaurants by user ", restaurants)
+        # res_filter = restaurants.filter(city__icontains=city)
 
         city = request.GET.get('city', None)
+
         if city is not None:
             restaurants = restaurants.filter(city__icontains=city)
+            print("filter ", restaurants)
 
         restaurants_serializer = RestaurantSerializer(restaurants, many=True)
         return JsonResponse(restaurants_serializer.data, safe=False)
@@ -69,14 +76,14 @@ def restaurant_detail(request, pk):
 
 @api_view(['GET'])
 def restaurant_cities(request):
-    # restaurants = Restaurant.objects.all()
-    # cities = Restaurant.objects.all().values('city')
-    cities = Restaurant.objects.values('city').order_by('city').distinct()
 
-    # set_cities = []
-    # for city in cities:
-    #     if city not in set_cities:
-    #         set_cities.append(city)
+    # cities = Restaurant.objects.values('city').order_by('city').distinct()
+    cities = Restaurant.objects.order_by('city').distinct('city').filter(user=request.user)
+
+    # user_cities = cities.filter(user=request.user)
+    # restaurants = Restaurant.objects.filter(user=request.user)
+    # user_cities = restaurants.values('city').order_by('city').distinct()
+    print(" user_cities ", cities)
 
     # print("*** city", set_cities)
     restaurants_serializer = RestaurantSerializer(cities, many=True)

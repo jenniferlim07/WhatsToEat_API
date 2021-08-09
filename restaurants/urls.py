@@ -8,6 +8,7 @@ urlpatterns = [
     path('restaurants', views.restaurant_list),
     path('restaurants/<int:pk>', views.restaurant_detail),
     path('restaurants/city', views.restaurant_cities),
+
     # path('restaurants/cuisines', views.cuisine_list),
     # path('restaurants/<int:pk>', views.cuisine_list)
 

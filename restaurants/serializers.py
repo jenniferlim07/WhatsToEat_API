@@ -8,7 +8,7 @@ class RestaurantSerializer(serializers.ModelSerializer):
     # cuisine = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     class Meta:
         model = Restaurant
-        fields = ('id','name', 'website', 'address', 'city')
+        fields = ('id', 'user', 'name', 'website', 'address', 'city')
 
 
 # class CuisineSerializer(serializers.ModelSerializer):

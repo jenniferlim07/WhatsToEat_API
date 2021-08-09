@@ -12,6 +12,8 @@ class Restaurant(models.Model):
     zip_code = models.CharField(max_length=5, blank=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
 
+    def __str__(self):
+        return self.name
 # class Cuisine(models.Model):
 #     type = models.CharField(max_length=30, blank=False, default='')
 #     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, null=True)

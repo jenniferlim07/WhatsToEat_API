@@ -19,12 +19,18 @@ from django.urls import path, include
 # from django.conf.urls import url, include 
 
 from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
+    # TokenObtainPairView,
     TokenRefreshView,
 )
 
+from users.views import MyTokenObtainPairView
+
+# urlpatterns = [
+#     # path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+#     path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
+
 urlpatterns = [ 
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
     path('admin/', admin.site.urls),
