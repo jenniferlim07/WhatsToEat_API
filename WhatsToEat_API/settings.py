@@ -62,15 +62,16 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_ALLOW_ALL = False
-# CORS_ORIGIN_WHITELIST = (
-#     'http://localhost:8081',
-#     'http://0.0.0.0:5000',
-# )
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8081",
-    # "http://0.0.0.0:5000"
-]
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:8081',
+    # "https://jenniferlim07.github.io/whats_to_eat_react/",
+)
+# CORS_ALLOWED_ORIGINS = [
+#     "https://jenniferlim07.github.io/whats_to_eat_react/",
+#     "http://localhost:8081",
+#     # "http://0.0.0.0:5000"
+# ]
 
 ROOT_URLCONF = 'WhatsToEat_API.urls'
 
