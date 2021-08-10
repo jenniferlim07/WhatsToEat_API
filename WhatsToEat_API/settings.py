@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-g%0*=&&b2%z(xo63+v-y#2f1^9wy!mps4yb%rh!q#@m3l6w@lv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://whatstoeat-backend.herokuapp.com/']
+ALLOWED_HOSTS = ['https://whatstoeat-backend.herokuapp.com/', '0.0.0.0']
 
 
 # Application definition
@@ -96,13 +96,22 @@ WSGI_APPLICATION = 'WhatsToEat_API.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     # 'NAME': 'whats_to_eat',
+    #     'NAME': 'restaurants_db',
+    #     'USER': 'postgres',
+    #     'PASSWORD': 'postgres',
+    #     'HOST': 'localhost',
+    #     'PORT': '5432',
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql',
         # 'NAME': 'whats_to_eat',
-        'NAME': 'restaurants_db',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'localhost',
+        'NAME': 'd3nli8o8d8buc0',
+        'USER': 'rswmhivtlpxnyh',
+        'PASSWORD': 'e99d066b8eeea26ccbc80d04eb57b31633f57fffe83dd545e3867d99dd2b5c76',
+        'HOST': 'ec2-52-4-111-46.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
