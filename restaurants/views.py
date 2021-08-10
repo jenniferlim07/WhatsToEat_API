@@ -7,7 +7,11 @@ from rest_framework import status
 from restaurants.models import Restaurant
 from restaurants.serializers import RestaurantSerializer
 from rest_framework.decorators import api_view
+from django.http import HttpResponse
 
+
+def home(request):
+    return HttpResponse('<h1>Restaurants Home</h1>')
 
 # Create your views here.
 @api_view(['GET', 'POST', 'DELETE'])
