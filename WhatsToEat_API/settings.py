@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-g%0*=&&b2%z(xo63+v-y#2f1^9wy!mps4yb%rh!q#@m3l6w@lv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0']
+ALLOWED_HOSTS = ['https://whatstoeat-backend.herokuapp.com/']
 
 
 # Application definition
@@ -67,8 +67,8 @@ CORS_ORIGIN_ALLOW_ALL = False
 #     'http://0.0.0.0:5000',
 # )
 CORS_ALLOWED_ORIGINS = [
-    # "http://localhost:8081",
-    "http://0.0.0.0:5000"
+    "http://localhost:8081",
+    # "http://0.0.0.0:5000"
 ]
 
 ROOT_URLCONF = 'WhatsToEat_API.urls'
