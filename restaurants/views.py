@@ -18,10 +18,11 @@ def home(request):
 def restaurant_list(request):
     # GET list of restaurants
     # or find by city
+    print("*** user *** ", request.user) 
     if request.method == 'GET':
         # restaurants = Restaurant.objects.all()
         # print("response ", request)
-        # Project.objects.filter(owner_id=currentUser).order_by('id')
+
         restaurants = Restaurant.objects.filter(user=request.user)
         # print("*** restaurants by user ", restaurants)
         # res_filter = restaurants.filter(city__icontains=city)
@@ -30,7 +31,7 @@ def restaurant_list(request):
 
         if city is not None:
             restaurants = restaurants.filter(city__icontains=city)
-            print("filter ", restaurants)
+            # print("filter ", restaurants)
 
         restaurants_serializer = RestaurantSerializer(restaurants, many=True)
         return JsonResponse(restaurants_serializer.data, safe=False)

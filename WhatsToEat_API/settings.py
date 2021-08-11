@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-g%0*=&&b2%z(xo63+v-y#2f1^9wy!mps4yb%rh!q#@m3l6w@lv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['whatstoeat-backend.herokuapp.com', '0.0.0.0']
+ALLOWED_HOSTS = ['whatstoeat-backend.herokuapp.com', '0.0.0.0', '127.0.0.1']
 
 
 # Application definition
@@ -166,9 +166,9 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
     ],
-    # 'DEFAULT_AUTHENTICATION_CLASSES': (
-    #     'rest_framework_simplejwt.authentication.JWTAuthentication',
-    # )
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
 }
 
 AUTH_USER_MODEL = "users.NewUser"
