@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from users.models import NewUser
+from users.models import User
 from django.contrib.auth.admin import UserAdmin
 from django.forms import TextInput, Textarea, CharField
 from django import forms
@@ -10,7 +10,7 @@ from django.db import models
 
 
 class UserAdminConfig(UserAdmin):
-    model = NewUser
+    model = User
     search_fields = ('email', 'user_name', 'first_name',)
     list_filter = ('email', 'user_name', 'first_name', 'is_active', 'is_staff')
     ordering = ('-start_date',)
@@ -32,4 +32,4 @@ class UserAdminConfig(UserAdmin):
     )
 
 
-admin.site.register(NewUser, UserAdminConfig)
+admin.site.register(User, UserAdminConfig)

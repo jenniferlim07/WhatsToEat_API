@@ -4,14 +4,52 @@ from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser 
 from rest_framework import status
 
-from restaurants.models import Restaurant
-from restaurants.serializers import RestaurantSerializer
+from restaurants.models import Restaurant, Cuisine
+from restaurants.serializers import RestaurantSerializer, CuisineSerializer
 from rest_framework.decorators import api_view
 from django.http import HttpResponse
 
+from rest_framework import viewsets
+from rest_framework.response import Response
 
 def home(request):
     return HttpResponse('<h1>Restaurants Home</h1>')
+
+class RestaurantViewSet(viewsets.ModelViewSet):
+    serializer_class = RestaurantSerializer
+
+    def get_queryset(self):
+        restaurant = Restaurant.objects.all()
+        print("testing", restaurant)
+        return restaurant
+
+    def create(self, request, *arg, **kwargs):
+        data = request.data
+        print("data ", data)
+        new_restaurant = Restaurant.objects.create(name=data["name"],website=data["website"], address=data["address"], city=data["city"],user_id=data["user"])
+        new_restaurant.save()
+
+        if data.get("cuisine"):
+            # for cat in data["category"]:
+
+            cuisine_object = Cuisine.objects.get(type=cuisine["type"])
+            new_restaurant.category.add(cuisine_object)
+        
+        serializer = RestaurantSerializer(new_restaurant)
+
+        return Response(serializer.data)
+
+class CuisineViewSet(viewsets.ModelViewSet):
+    serializer_class = CuisineSerializer  
+
+    def get_queryset(self):
+        cuisine = Cuisine.objects.all()
+        print("get cuisine ", cuisine)
+        # print("cat ", category[0].id)
+        return cuisine
+
+
+
 
 # Create your views here.
 @api_view(['GET', 'POST', 'DELETE'])
@@ -67,8 +105,18 @@ def restaurant_detail(request, pk):
 
     # PUT / Update restaurant
     elif request.method == 'PUT':
-        restaurant_data = JSONParser().parse(request)
+        # restaurant_data = JSONParser().parse(request)
+        restaurant_data = request.data
+
+        if restaurant_data.get("cuisine"):
+            print("cuisine ", restaurant_data.get("cuisine"))
+            
+            cuisine_object = Cuisine.objects.get(id=restaurant_data.get("cuisine"))
+            restaurant.cuisine.add(cuisine_object)
+
+
         restaurants_serializer = RestaurantSerializer(restaurant, data=restaurant_data)
+        
         if restaurants_serializer.is_valid():
             restaurants_serializer.save()
             return JsonResponse(restaurants_serializer.data)
@@ -93,6 +141,11 @@ def restaurant_cities(request):
     # print("*** city", set_cities)
     restaurants_serializer = RestaurantSerializer(cities, many=True)
     return JsonResponse(restaurants_serializer.data, safe=False)
+
+@api_view(['GET'])
+def random_restaurant(request):
+    restaurants = Restaurant.objects.filter(user=request.user)
+
 
 
 # @api_view(['GET', 'POST'])

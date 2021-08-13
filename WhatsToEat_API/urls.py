@@ -25,6 +25,14 @@ from rest_framework_simplejwt.views import (
 
 from users.views import MyTokenObtainPairView
 
+from restaurants.views import RestaurantViewSet, CuisineViewSet
+from rest_framework.routers import DefaultRouter
+from rest_framework import routers
+
+router=DefaultRouter()
+router.register(r'api/restaurant', RestaurantViewSet, basename='restaurant')
+router.register(r'api/cuisine', CuisineViewSet, basename='cuisine')
+
 # urlpatterns = [
 #     # path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
 #     path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
@@ -41,4 +49,6 @@ urlpatterns = [
     # path('/', restaurants.urls)
     path('api/user/', include('users.urls', namespace='users')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
+    path(r'', include(router.urls)),
 ]
