@@ -9,6 +9,7 @@ urlpatterns = [
     path('restaurants', views.restaurant_list),
     path('restaurants/<int:pk>', views.restaurant_detail),
     path('restaurants/city', views.restaurant_cities),
+    path('cuisines', views.cuisine_list),
     path('cuisines/<int:pk>', views.cuisine_restaurants)
 
     # path('restaurants/cuisines', views.cuisine_list),

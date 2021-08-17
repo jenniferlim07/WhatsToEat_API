@@ -102,6 +102,7 @@ DATABASES = {
     #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
     #     # 'NAME': 'whats_to_eat',
     #     'NAME': 'restaurants_db',
+    #     # 'NAME': 'restaurants_test_db',
     #     'USER': 'postgres',
     #     'PASSWORD': 'postgres',
     #     'HOST': 'localhost',

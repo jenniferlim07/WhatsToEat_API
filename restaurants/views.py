@@ -66,7 +66,7 @@ class CuisineViewSet(viewsets.ModelViewSet):
     def create(self, request, *arg, **kwargs):
         data = request.data
         print("data ", data)
-        new_cuisine = Cuisine.objects.create(type=data["type"])
+        new_cuisine = Cuisine.objects.create(type=data["type"], user_id=data["user"])
         new_cuisine.save()
         
         serializer = CuisineSerializer(new_cuisine)
@@ -94,6 +94,29 @@ def cuisine_restaurants(request, pk):
     elif request.method == 'DELETE':
         cuisine.delete()
         return JsonResponse({'message': 'Restaurant was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['GET', 'POST', 'DELETE'])
+def cuisine_list(request):
+    # GET list of restaurants
+    # or find by city
+    print("*** user *** ", request.user) 
+    if request.method == 'GET':
+
+        cuisines = Cuisine.objects.filter(user=request.user)
+
+        cuisine_serializer = CuisineSerializer(cuisines, many=True)
+        return JsonResponse(cuisine_serializer.data, safe=False)
+        # 'safe=False' for objects serialization
+
+    # POST a new restaurant
+    elif request.method == 'POST':
+        cuisine_data = JSONParser().parse(request)
+        cuisine_serializer = CuisineSerializer(data=cuisine_data)
+        if cuisine_serializer.is_valid():
+            cuisine_serializer.save()
+            return JsonResponse(cuisine_serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(cuisine_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 # Create your views here.

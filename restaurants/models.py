@@ -6,6 +6,7 @@ from django.conf import settings
 class Cuisine(models.Model):
     type = models.CharField(max_length=70, blank=False, default='')
     # restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.type
