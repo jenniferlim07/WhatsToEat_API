@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'users',
     'rest_framework_simplejwt.token_blacklist',
-    'jet',
+    # 'jet',
 ]
 
 MIDDLEWARE = [
@@ -101,8 +101,8 @@ DATABASES = {
     # 'default': {
     #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
     #     # 'NAME': 'whats_to_eat',
-    #     'NAME': 'restaurants_db',
-    #     # 'NAME': 'restaurants_test_db',
+    #     # 'NAME': 'restaurants_db',
+    #     'NAME': 'restaurants_test_db',
     #     'USER': 'postgres',
     #     'PASSWORD': 'postgres',
     #     'HOST': 'localhost',
