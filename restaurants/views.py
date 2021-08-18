@@ -20,12 +20,14 @@ class RestaurantViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         restaurants = Restaurant.objects.all()
+        # user = self.request.user
         # print("testing", restaurants)
 
         # for restaurant in restaurants:
         #     for cuisine in restaurant.cuisine.all():
         #         print("r-c", cuisine.type)
 
+        # return get_object_or_404(Restaurant, id=self.kwargs['pk'])
         return restaurants
 
 
